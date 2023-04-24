@@ -382,6 +382,11 @@ template {
   cursor: pointer;
   vertical-align: top;
   margin: 3px;
+  transition: 0.3s;
+}
+
+.active {
+  background-color: rgba(171, 38, 176, 0.533);
 }
 
 .row1 button:last-child {

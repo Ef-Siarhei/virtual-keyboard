@@ -20,6 +20,7 @@
     ],
     "prefer-destructuring": "off",
     "no-multiple-empty-lines": "off",
-    "no-alert": "off"
+    "no-alert": "off",
+    "eqeqeq": "off"
   }
 }
