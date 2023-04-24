@@ -22,13 +22,10 @@ keyboard.className = 'keyboard';
 wrapContent.append(keyboard);
 
 // instruction1
-const instructionOne = document.createElement('p');
-instructionOne.className = 'instruction';
-instructionOne.innerText = 'Клавиатура создана в операционной системе Windows.';
-wrapContent.append(instructionOne);
-
-// instruction
-const instructionTwo = document.createElement('p');
-instructionTwo.className = 'instruction';
-instructionTwo.innerText = 'Для переключения языка комбинация: левый Shift + Alt';
-wrapContent.append(instructionTwo);
+const html = `
+<p class='instruction'>
+  Клавиатура создана в операционной системе <b>Windows</b>.<br>
+  Для переключения языка комбинация: левый <b>Shift + Alt</b>.
+</p>
+`;
+wrapContent.insertAdjacentHTML('beforeend', html);
