@@ -67,7 +67,8 @@ function createButtons() {
 
     el.forEach((key, keyIndex) => {
       const keyElement = document.createElement('button');
-      keyElement.innerHTML = `${key}`;
+      keyElement.innerText = `${key}`;
+      // keyElement.innerHTML = `${key}`;
       keyElement.id = `${buttons.id[index][keyIndex]}`;
       keyElement.setAttribute('type', 'button');
       keyElement.classList.add('keyboard__button');
@@ -80,7 +81,7 @@ createButtons();
 
 // добавить класс Active при нажатии на кнопку настоящей клавиатуры
 const button = document.getElementsByClassName('keyboard__button');
-// console.log(button);
+
 body.addEventListener('keydown', (event) => {
   for (let i = 0; i < button.length; i++) {
     if (button[i].id == event.code) {
@@ -88,6 +89,7 @@ body.addEventListener('keydown', (event) => {
     }
   }
 });
+
 body.addEventListener('keyup', (event) => {
   for (let i = 0; i < button.length; i++) {
     if (button[i].id == event.code) {
@@ -95,3 +97,86 @@ body.addEventListener('keyup', (event) => {
     }
   }
 });
+
+// отключить Tab перемещение с клавиатуры
+window.onkeydown = (evt) => {
+  if (evt.key == 'Tab') {
+    evt.preventDefault();
+  }
+};
+
+
+body.addEventListener('keydown', (event) => {
+  // привязать настоящую клавиатуру к виртуальной, добавить Tab
+  textarea.focus();
+  // button Tab
+  if (event.key == 'Tab') {
+    textarea.value += '    ';
+  }
+  // CapsLock
+  if (event.key == 'CapsLock') {
+    for (let i = 0; i < button.length; i++) {
+      if (button[i].innerText.length == 1) {
+        button[i].classList.toggle('upper-case');
+      }
+    }
+  }
+});
+
+
+// Переключить язык ввода ----------- не доделал
+const pressedButton = {};
+
+onkeydown = (e) => {
+  if (e.code === 'ShiftLeft') { pressedButton[e.code] = e.code; }
+  if (e.code === 'AltLeft') { pressedButton[e.code] = e.code; }
+
+  if (pressedButton.ShiftLeft == 'ShiftLeft'
+    && pressedButton.AltLeft == 'AltLeft') {
+    console.log(pressedButton);
+  }
+};
+
+onkeyup = (e) => {
+  if (e.code === 'ShiftLeft') { delete pressedButton[e.code]; }
+  if (e.code === 'AltLeft') { delete pressedButton[e.code]; }
+};
+
+
+
+
+// textarea.addEventListener('click', () => {
+//   textarea.value = textarea.textContent;
+// });
+
+// body.addEventListener('keydown', (event) => {
+//   textarea.focus();
+//   if (event.key == 'Tab') {
+//     textarea.value += '    ';
+//     // textarea.textContent += '    ';
+//     // event.preventDefault();
+//   }
+
+//   // if (event.code == 'KeyQ') {
+//   //   textarea.innerHTML += '    ';
+//   // }
+//   // if (event.key == 'Backspace') {
+//   //   textarea.value = textarea.value.substring(0, textarea.value.length - 1);
+//   // }
+
+
+//   // Tab
+//   // if (event.key == 'Tab') { textarea.innerHTML += '    '; } else {
+//   //   textarea.innerHTML += event.key;
+//   // }
+
+//   // if (event.key.length <= 1) { textarea.value += event.key; }
+//   // console.dir(textarea.innerHTML);
+//   // textarea.innerHTML += event.key;
+//   // console.dir(event.key);
+// });
+
+// // textarea.addEventListener('click', () => {
+// //   textarea.value = textarea.textContent;
+// // });
+
