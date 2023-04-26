@@ -41,6 +41,10 @@
   vertical-align: top;
   margin: 3px;
   transition: .3s;
+
+  &:active {
+    background-color: rgba(171, 38, 176, 0.533);
+  }
 }
 
 .active {
