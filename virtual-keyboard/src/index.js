@@ -19,6 +19,7 @@ wrapContent.append(title);
 // textarea
 const textarea = document.createElement('textarea');
 textarea.className = 'textarea';
+textarea.setAttribute('readonly', '');
 wrapContent.append(textarea);
 
 // keyboard
@@ -75,7 +76,8 @@ function setButtonsValue() {
 
 
 // добавить класс Active при нажатии на кнопку настоящей клавиатуры
-const button = document.getElementsByClassName('keyboard__button');
+const button = [...document.getElementsByClassName('keyboard__button')];
+
 
 body.addEventListener('keydown', (event) => {
   for (let i = 0; i < button.length; i++) {
@@ -102,20 +104,44 @@ window.onkeydown = (evt) => {
 
 
 body.addEventListener('keydown', (event) => {
-  // привязать настоящую клавиатуру к виртуальной, добавить Tab
-  textarea.focus();
-  // button Tab
-  if (event.key == 'Tab') {
-    textarea.value += '    ';
-  }
-  // CapsLock
-  if (event.key == 'CapsLock') {
-    for (let i = 0; i < button.length; i++) {
-      if (button[i].innerText.length == 1) {
-        button[i].classList.toggle('upper-case');
+  // textarea.focus();
+
+  button.forEach((el) => {
+    if (el.innerText.length == 1) {
+      if (el.id == event.code) {
+        textarea.value += el.innerText
       }
     }
+  })
+
+  switch (event.code) {
+    case 'Tab':
+      textarea.value += '    ';
+      break;
+
+    case 'CapsLock':
+      for (let i = 0; i < button.length; i++) {
+        if (button[i].innerText.length == 1) {
+          button[i].classList.toggle('upper-case');
+        }
+      }
+      break;
+
+    case 'Space':
+      textarea.value += '  ';
+      break;
+
+    case 'Enter':
+      textarea.value += "\n";
+      break;
+
+    case 'Backspace':
+      textarea.value = textarea.value.substring(0, textarea.value.length - 1);
+      break;
   }
+
+
+
 });
 
 
@@ -140,40 +166,29 @@ onkeydown = (e) => {
 
 
 
+keyboard.addEventListener('click', (event) => {
+  console.log(event.target.id);
+  button.forEach((el) => {
+    if (el.innerText.length == 1) {
+      if (el.id == event.target.id) {
+        textarea.value += el.innerText
+        console.log(el.innerText);
+      }
+    }
+  })
+
+  if (event.target.id == 'Tab') {
+    textarea.value += '    ';
+  }
 
 
-// textarea.addEventListener('click', () => {
-//   textarea.value = textarea.textContent;
-// });
+  if (event.target.id == 'CapsLock') {
+    for (let i = 0; i < button.length; i++) {
+      if (button[i].innerText.length == 1) {
+        button[i].classList.toggle('upper-case');
+      }
+    }
+  }
 
-// body.addEventListener('keydown', (event) => {
-//   textarea.focus();
-//   if (event.key == 'Tab') {
-//     textarea.value += '    ';
-//     // textarea.textContent += '    ';
-//     // event.preventDefault();
-//   }
-
-//   // if (event.code == 'KeyQ') {
-//   //   textarea.innerHTML += '    ';
-//   // }
-//   // if (event.key == 'Backspace') {
-//   //   textarea.value = textarea.value.substring(0, textarea.value.length - 1);
-//   // }
-
-
-//   // Tab
-//   // if (event.key == 'Tab') { textarea.innerHTML += '    '; } else {
-//   //   textarea.innerHTML += event.key;
-//   // }
-
-//   // if (event.key.length <= 1) { textarea.value += event.key; }
-//   // console.dir(textarea.innerHTML);
-//   // textarea.innerHTML += event.key;
-//   // console.dir(event.key);
-// });
-
-// // textarea.addEventListener('click', () => {
-// //   textarea.value = textarea.textContent;
-// // });
+});
 
