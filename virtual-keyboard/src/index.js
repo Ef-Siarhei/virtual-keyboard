@@ -1,6 +1,12 @@
 import { buttons } from '../js/objButtons.js';
 
-let language = 'en';
+
+let language;
+function localHash() {
+  language = (!sessionStorage.getItem('language')) ? 'en' : sessionStorage.getItem('language');
+  return language;
+}
+localHash();
 
 /* eslint-disable no-undef */
 const body = document.querySelector('body');
@@ -144,9 +150,13 @@ onkeydown = (e) => {
 
   if (pressedButton.ShiftLeft == 'ShiftLeft'
     && pressedButton.AltLeft == 'AltLeft') {
-    if (language == 'en') { language = 'ru'; } else {
-      language = 'en';
+    if (language == 'en') {
+      sessionStorage.setItem('language', 'ru');
+    } else {
+      sessionStorage.setItem('language', 'en');
     }
+
+    localHash();
     setButtonsValue();
   }
 };
