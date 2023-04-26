@@ -1,3 +1,7 @@
+import { buttons } from '../js/objButtons.js'
+
+let language = 'en';
+
 /* eslint-disable no-undef */
 const body = document.querySelector('body');
 
@@ -31,32 +35,8 @@ const html = `
 `;
 wrapContent.insertAdjacentHTML('beforeend', html);
 
-// create buttons
-const language = 'en';
-const buttons = {
-  en: [
-    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
-    ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
-    ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'],
-    ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ],
-  ru: [
-    ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
-    ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
-    ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
-    ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ],
-  id: [
-    ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace'],
-    ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash'],
-    ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
-    ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'],
-    ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
-  ],
-};
 
+// create buttons
 function createButtons() {
   const arr = buttons[language];
 
@@ -67,17 +47,32 @@ function createButtons() {
 
     el.forEach((key, keyIndex) => {
       const keyElement = document.createElement('button');
-      keyElement.innerText = `${key}`;
-      // keyElement.innerHTML = `${key}`;
       keyElement.id = `${buttons.id[index][keyIndex]}`;
       keyElement.setAttribute('type', 'button');
       keyElement.classList.add('keyboard__button');
       elRow.append(keyElement);
     });
+
     keyboard.append(elRow);
   });
+
+  setButtonsValue();
 }
 createButtons();
+
+
+// set  Buttons Value
+function setButtonsValue() {
+  const arrId = buttons.id;
+  let keyboardDom = document.getElementsByClassName('keyboard__row');
+
+  arrId.forEach((el, indexId) => {
+    el.forEach((key, keyIndex) => {
+      keyboardDom[indexId].childNodes[keyIndex].innerText = `${buttons[language][indexId][keyIndex]}`
+    });
+  });
+}
+
 
 // добавить класс Active при нажатии на кнопку настоящей клавиатуры
 const button = document.getElementsByClassName('keyboard__button');
@@ -124,23 +119,25 @@ body.addEventListener('keydown', (event) => {
 });
 
 
-// Переключить язык ввода ----------- не доделал
+// Переключить язык ввода
 const pressedButton = {};
-
 onkeydown = (e) => {
   if (e.code === 'ShiftLeft') { pressedButton[e.code] = e.code; }
   if (e.code === 'AltLeft') { pressedButton[e.code] = e.code; }
 
   if (pressedButton.ShiftLeft == 'ShiftLeft'
     && pressedButton.AltLeft == 'AltLeft') {
-    console.log(pressedButton);
+    if (language == 'en') { language = 'ru' } else {
+      language = 'en'
+    }
+    setButtonsValue()
   }
+  onkeyup = (e) => {
+    if (e.code === 'ShiftLeft') { delete pressedButton[e.code]; }
+    if (e.code === 'AltLeft') { delete pressedButton[e.code]; }
+  };
 };
 
-onkeyup = (e) => {
-  if (e.code === 'ShiftLeft') { delete pressedButton[e.code]; }
-  if (e.code === 'AltLeft') { delete pressedButton[e.code]; }
-};
 
 
 
