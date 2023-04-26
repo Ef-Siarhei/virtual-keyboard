@@ -21,6 +21,13 @@
     "prefer-destructuring": "off",
     "no-multiple-empty-lines": "off",
     "no-alert": "off",
-    "eqeqeq": "off"
+    "eqeqeq": "off",
+    "no-use-before-define": "off",
+    "import/prefer-default-export": [
+      "off"
+    ],
+    "import/extensions": [
+      "off"
+    ]
   }
 }

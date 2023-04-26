@@ -1,4 +1,4 @@
-import { buttons } from '../js/objButtons.js'
+import { buttons } from '../js/objButtons.js';
 
 let language = 'en';
 
@@ -65,11 +65,11 @@ createButtons();
 // set  Buttons Value
 function setButtonsValue() {
   const arrId = buttons.id;
-  let keyboardDom = document.getElementsByClassName('keyboard__row');
+  const keyboardDom = document.getElementsByClassName('keyboard__row');
 
   arrId.forEach((el, indexId) => {
     el.forEach((key, keyIndex) => {
-      keyboardDom[indexId].childNodes[keyIndex].innerText = `${buttons[language][indexId][keyIndex]}`
+      keyboardDom[indexId].childNodes[keyIndex].innerText = `${buttons[language][indexId][keyIndex]}`;
     });
   });
 }
@@ -95,26 +95,79 @@ body.addEventListener('keyup', (event) => {
   }
 });
 
-// отключить Tab перемещение с клавиатуры
-window.onkeydown = (evt) => {
-  if (evt.key == 'Tab') {
-    evt.preventDefault();
-  }
-};
-
-
+// ввод текста с клавиатуры
 body.addEventListener('keydown', (event) => {
-  // textarea.focus();
-
+  textarea.focus();
   button.forEach((el) => {
     if (el.innerText.length == 1) {
       if (el.id == event.code) {
-        textarea.value += el.innerText
+        textarea.value += el.innerText;
       }
     }
-  })
-
+  });
   switch (event.code) {
+    case 'Tab':
+      textarea.value += '    ';
+      event.preventDefault();
+      break;
+
+    case 'CapsLock':
+      for (let i = 0; i < button.length; i++) {
+        if (button[i].innerText.length == 1) {
+          button[i].classList.toggle('upper-case');
+        }
+      }
+      break;
+
+    case 'Space':
+      textarea.value += '  ';
+      break;
+
+    case 'Enter':
+      textarea.value += '\n';
+      break;
+
+    case 'Backspace':
+      textarea.value = textarea.value.substring(0, textarea.value.length - 1);
+      break;
+
+    default:
+  }
+});
+
+
+// Переключить язык ввода
+const pressedButton = {};
+onkeydown = (e) => {
+  if (e.code === 'ShiftLeft') { pressedButton[e.code] = e.code; }
+  if (e.code === 'AltLeft') { pressedButton[e.code] = e.code; }
+
+  if (pressedButton.ShiftLeft == 'ShiftLeft'
+    && pressedButton.AltLeft == 'AltLeft') {
+    if (language == 'en') { language = 'ru'; } else {
+      language = 'en';
+    }
+    setButtonsValue();
+  }
+};
+
+onkeyup = (e) => {
+  if (e.code === 'ShiftLeft') { delete pressedButton[e.code]; }
+  if (e.code === 'AltLeft') { delete pressedButton[e.code]; }
+};
+
+
+// ввод текста мышкой
+keyboard.addEventListener('click', (event) => {
+  button.forEach((el) => {
+    if (el.innerText.length == 1) {
+      if (el.id == event.target.id) {
+        textarea.value += el.innerText;
+      }
+    }
+  });
+
+  switch (event.target.id) {
     case 'Tab':
       textarea.value += '    ';
       break;
@@ -132,63 +185,14 @@ body.addEventListener('keydown', (event) => {
       break;
 
     case 'Enter':
-      textarea.value += "\n";
+      textarea.value += '\n';
       break;
 
     case 'Backspace':
       textarea.value = textarea.value.substring(0, textarea.value.length - 1);
       break;
+
+    default:
   }
-
-
-
-});
-
-
-// Переключить язык ввода
-const pressedButton = {};
-onkeydown = (e) => {
-  if (e.code === 'ShiftLeft') { pressedButton[e.code] = e.code; }
-  if (e.code === 'AltLeft') { pressedButton[e.code] = e.code; }
-
-  if (pressedButton.ShiftLeft == 'ShiftLeft'
-    && pressedButton.AltLeft == 'AltLeft') {
-    if (language == 'en') { language = 'ru' } else {
-      language = 'en'
-    }
-    setButtonsValue()
-  }
-  onkeyup = (e) => {
-    if (e.code === 'ShiftLeft') { delete pressedButton[e.code]; }
-    if (e.code === 'AltLeft') { delete pressedButton[e.code]; }
-  };
-};
-
-
-
-keyboard.addEventListener('click', (event) => {
-  console.log(event.target.id);
-  button.forEach((el) => {
-    if (el.innerText.length == 1) {
-      if (el.id == event.target.id) {
-        textarea.value += el.innerText
-        console.log(el.innerText);
-      }
-    }
-  })
-
-  if (event.target.id == 'Tab') {
-    textarea.value += '    ';
-  }
-
-
-  if (event.target.id == 'CapsLock') {
-    for (let i = 0; i < button.length; i++) {
-      if (button[i].innerText.length == 1) {
-        button[i].classList.toggle('upper-case');
-      }
-    }
-  }
-
 });
 
