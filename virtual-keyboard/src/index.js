@@ -69,13 +69,13 @@ createButtons();
 
 
 // set  Buttons Value
-function setButtonsValue() {
+function setButtonsValue(...args) {
   const arrId = buttons.id;
   const keyboardDom = document.getElementsByClassName('keyboard__row');
-
+  const a = args[0] ? args[0] : '';
   arrId.forEach((el, indexId) => {
     el.forEach((key, keyIndex) => {
-      keyboardDom[indexId].childNodes[keyIndex].innerText = `${buttons[language][indexId][keyIndex]}`;
+      keyboardDom[indexId].childNodes[keyIndex].innerText = `${buttons[`${language + a}`][indexId][keyIndex]}`;
     });
   });
 }
@@ -84,21 +84,27 @@ function setButtonsValue() {
 // добавить класс Active при нажатии на кнопку настоящей клавиатуры
 const button = [...document.getElementsByClassName('keyboard__button')];
 
-
-body.addEventListener('keydown', (event) => {
+function addActive(event) {
   for (let i = 0; i < button.length; i++) {
     if (button[i].id == event.code) {
       button[i].classList.add('active');
     }
   }
-});
-
-body.addEventListener('keyup', (event) => {
+}
+function removeActive(event) {
   for (let i = 0; i < button.length; i++) {
     if (button[i].id == event.code) {
       button[i].classList.remove('active');
     }
   }
+}
+
+body.addEventListener('keydown', (event) => {
+  addActive(event);
+});
+
+body.addEventListener('keyup', (event) => {
+  removeActive(event);
 });
 
 // ввод текста с клавиатуры
@@ -126,7 +132,7 @@ body.addEventListener('keydown', (event) => {
       break;
 
     case 'Space':
-      textarea.value += '  ';
+      textarea.value += ' ';
       break;
 
     case 'Enter':
@@ -159,11 +165,15 @@ onkeydown = (e) => {
     localHash();
     setButtonsValue();
   }
+
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') { setButtonsValue('-Shift'); }
 };
 
 onkeyup = (e) => {
   if (e.code === 'ControlLeft') { delete pressedButton[e.code]; }
   if (e.code === 'AltLeft') { delete pressedButton[e.code]; }
+
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') { setButtonsValue(); }
 };
 
 
@@ -191,7 +201,7 @@ keyboard.addEventListener('click', (event) => {
       break;
 
     case 'Space':
-      textarea.value += '  ';
+      textarea.value += ' ';
       break;
 
     case 'Enter':
@@ -203,5 +213,18 @@ keyboard.addEventListener('click', (event) => {
       break;
 
     default:
+  }
+});
+
+const shiftLeft = document.querySelector('#ShiftLeft');
+const shiftRight = document.querySelector('#ShiftRight');
+keyboard.addEventListener('click', (event) => {
+  if (event.target.id === 'ShiftLeft' || event.target.id === 'ShiftRight') {
+    setButtonsValue('-Shift');
+    event.target.classList.add('active');
+  } else if ((event.target.id !== 'ShiftLeft' || event.target.id !== 'ShiftRight')
+    && (shiftLeft.classList.contains('active') || shiftRight.classList.contains('active'))) {
+    setButtonsValue();
+    shiftLeft.classList.remove('active');
   }
 });
