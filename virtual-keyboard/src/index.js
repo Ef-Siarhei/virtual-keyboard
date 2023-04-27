@@ -25,7 +25,6 @@ wrapContent.append(title);
 // textarea
 const textarea = document.createElement('textarea');
 textarea.className = 'textarea';
-textarea.setAttribute('readonly', '');
 wrapContent.append(textarea);
 
 // keyboard
@@ -105,6 +104,11 @@ body.addEventListener('keydown', (event) => {
 
 body.addEventListener('keyup', (event) => {
   removeActive(event);
+});
+
+// поймать событие нажатия кнопки и отменить действие
+body.addEventListener('keydown', (e) => {
+  e.preventDefault();
 });
 
 // ввод текста с клавиатуры
@@ -228,3 +232,4 @@ keyboard.addEventListener('click', (event) => {
     shiftLeft.classList.remove('active');
   }
 });
+
