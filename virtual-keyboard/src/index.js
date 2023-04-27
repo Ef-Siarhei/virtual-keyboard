@@ -37,7 +37,7 @@ wrapContent.append(keyboard);
 const html = `
 <p class='instruction'>
   Клавиатура создана в операционной системе <b>Windows</b>.<br>
-  Для переключения языка комбинация: левый <b>Shift + Alt</b>.
+  Для переключения языка комбинация: левый <b>Ctrl + Alt</b>.
 </p>
 `;
 wrapContent.insertAdjacentHTML('beforeend', html);
@@ -145,10 +145,10 @@ body.addEventListener('keydown', (event) => {
 // Переключить язык ввода
 const pressedButton = {};
 onkeydown = (e) => {
-  if (e.code === 'ShiftLeft') { pressedButton[e.code] = e.code; }
+  if (e.code === 'ControlLeft') { pressedButton[e.code] = e.code; }
   if (e.code === 'AltLeft') { pressedButton[e.code] = e.code; }
 
-  if (pressedButton.ShiftLeft == 'ShiftLeft'
+  if (pressedButton.ControlLeft == 'ControlLeft'
     && pressedButton.AltLeft == 'AltLeft') {
     if (language == 'en') {
       sessionStorage.setItem('language', 'ru');
@@ -162,7 +162,7 @@ onkeydown = (e) => {
 };
 
 onkeyup = (e) => {
-  if (e.code === 'ShiftLeft') { delete pressedButton[e.code]; }
+  if (e.code === 'ControlLeft') { delete pressedButton[e.code]; }
   if (e.code === 'AltLeft') { delete pressedButton[e.code]; }
 };
 
@@ -205,4 +205,3 @@ keyboard.addEventListener('click', (event) => {
     default:
   }
 });
-
