@@ -1,4 +1,4 @@
-import { buttons } from '../js/objButtons.js';
+import buttons from '../js/objButtons.js';
 
 let language;
 const localHash = () => {
