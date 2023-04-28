@@ -1,13 +1,12 @@
 import { buttons } from '../js/objButtons.js';
 
 let language;
-function localHash() {
+const localHash = () => {
   language = (!sessionStorage.getItem('language')) ? 'en' : sessionStorage.getItem('language');
   return language;
-}
+};
 localHash();
 
-/* eslint-disable no-undef */
 const body = document.querySelector('body');
 
 // создать оболочку для всего контента
@@ -53,7 +52,7 @@ const setButtonsValue = (...args) => {
 };
 
 // create buttons
-function createButtons() {
+const createButtons = () => {
   const arr = buttons[language];
 
   arr.forEach((el, index) => {
@@ -73,26 +72,26 @@ function createButtons() {
   });
 
   setButtonsValue();
-}
+};
 createButtons();
 
 // добавить класс Active при нажатии на кнопку настоящей клавиатуры
 const button = [...document.getElementsByClassName('keyboard__button')];
 
-function addActive(event) {
+const addActive = (event) => {
   for (let i = 0; i < button.length; i += 1) {
     if (button[i].id === event.code) {
       button[i].classList.add('active');
     }
   }
-}
-function removeActive(event) {
+};
+const removeActive = (event) => {
   for (let i = 0; i < button.length; i += 1) {
     if (button[i].id === event.code) {
       button[i].classList.remove('active');
     }
   }
-}
+};
 
 body.addEventListener('keydown', (event) => {
   addActive(event);
