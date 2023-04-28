@@ -153,10 +153,11 @@ const getTextarea = document.querySelector('.textarea');
 const backspaceValue = () => {
   const indexSymbolBeforeCursor = getTextarea.selectionEnd - 1;
   const arrTextareaValue = textarea.value.split('');
-
-  arrTextareaValue.splice(indexSymbolBeforeCursor, 1);
-  textarea.value = arrTextareaValue.join('');
-  getTextarea.selectionEnd = indexSymbolBeforeCursor;
+  if (indexSymbolBeforeCursor >= 0) {
+    arrTextareaValue.splice(indexSymbolBeforeCursor, 1);
+    textarea.value = arrTextareaValue.join('');
+    getTextarea.selectionEnd = indexSymbolBeforeCursor;
+  }
 };
 
 // function remove symbol with button delete
