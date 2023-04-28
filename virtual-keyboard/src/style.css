@@ -356,7 +356,12 @@ template {
   width: 100%;
   height: 200px;
   margin-bottom: 0.5rem;
-  outline: none;
+  border-radius: 5px;
+  border: 4px solid #000;
+  outline: 8px solid rgb(24, 34, 96);
+  outline-offset: -11px;
+  padding: 15px;
+  background-color: rgb(218, 215, 186);
 }
 
 .keyboard {
