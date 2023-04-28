@@ -144,7 +144,7 @@ body.addEventListener('keydown', (event) => {
       break;
 
     case 'Backspace':
-      textarea.value = textarea.value.substring(0, textarea.value.length - 1);
+      backspaceValue();
       break;
 
     default:
@@ -183,6 +183,7 @@ onkeyup = (e) => {
 
 // ввод текста мышкой
 keyboard.addEventListener('click', (event) => {
+  textarea.focus();
   button.forEach((el) => {
     if (el.innerText.length == 1) {
       if (el.id == event.target.id) {
@@ -213,7 +214,7 @@ keyboard.addEventListener('click', (event) => {
       break;
 
     case 'Backspace':
-      textarea.value = textarea.value.substring(0, textarea.value.length - 1);
+      backspaceValue();
       break;
 
     default:
@@ -233,3 +234,16 @@ keyboard.addEventListener('click', (event) => {
   }
 });
 
+
+
+const getTextarea = document.querySelector('.textarea');
+
+// function remove symbol with help button backspace
+const backspaceValue = () => {
+  const indexSymbolBeforeCursor = getTextarea.selectionEnd - 1;
+  const arrTextareaValue = textarea.value.split('');
+
+  arrTextareaValue.splice(indexSymbolBeforeCursor, 1);
+  textarea.value = arrTextareaValue.join('');
+  getTextarea.selectionEnd = indexSymbolBeforeCursor;
+};
