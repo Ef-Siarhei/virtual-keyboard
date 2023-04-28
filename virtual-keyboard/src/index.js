@@ -8,7 +8,7 @@ const localHash = () => {
 localHash();
 
 const body = document.querySelector('body');
-
+body.className = 'body';
 // создать оболочку для всего контента
 const wrapContent = document.createElement('div');
 wrapContent.className = 'wrapContent';
