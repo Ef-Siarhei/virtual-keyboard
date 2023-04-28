@@ -176,7 +176,7 @@ const inputValue = (symbol) => {
 
   arrTextareaValue.splice(indexSymbolAfterCursor, 0, symbol).join('');
   textarea.value = arrTextareaValue.join('');
-  getTextarea.selectionEnd = indexSymbolAfterCursor + 1;
+  getTextarea.selectionEnd = indexSymbolAfterCursor + symbol.length;
 };
 
 const capsLock = () => {
@@ -241,7 +241,7 @@ keyboard.addEventListener('click', (event) => {
 
   switch (event.target.id) {
     case 'Tab':
-      inputValue('1111');
+      inputValue('    ');
       break;
 
     case 'CapsLock':
