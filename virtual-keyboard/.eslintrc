@@ -9,16 +9,6 @@
   ],
   "rules": {
     "no-console": "off",
-    "eol-last": "off",
-    "max-len": [
-      "error",
-      150,
-      {
-        "ignoreUrls": true
-      }
-    ],
-    "prefer-destructuring": "off",
-    "no-multiple-empty-lines": "off",
     "no-alert": "off",
     "eqeqeq": "off",
     "no-use-before-define": "off",

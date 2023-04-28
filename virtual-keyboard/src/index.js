@@ -1,6 +1,5 @@
 import { buttons } from '../js/objButtons.js';
 
-
 let language;
 function localHash() {
   language = (!sessionStorage.getItem('language')) ? 'en' : sessionStorage.getItem('language');
@@ -41,7 +40,6 @@ const html = `
 `;
 wrapContent.insertAdjacentHTML('beforeend', html);
 
-
 // create buttons
 function createButtons() {
   const arr = buttons[language];
@@ -66,7 +64,6 @@ function createButtons() {
 }
 createButtons();
 
-
 // set  Buttons Value
 function setButtonsValue(...args) {
   const arrId = buttons.id;
@@ -78,7 +75,6 @@ function setButtonsValue(...args) {
     });
   });
 }
-
 
 // добавить класс Active при нажатии на кнопку настоящей клавиатуры
 const button = [...document.getElementsByClassName('keyboard__button')];
@@ -150,7 +146,6 @@ body.addEventListener('keydown', (event) => {
   }
 });
 
-
 // Переключить язык ввода
 const pressedButton = {};
 onkeydown = (e) => {
@@ -178,7 +173,6 @@ onkeyup = (e) => {
 
   if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') { setButtonsValue(); }
 };
-
 
 // ввод текста мышкой
 keyboard.addEventListener('click', (event) => {
@@ -234,10 +228,7 @@ keyboard.addEventListener('click', (event) => {
   }
 });
 
-
-
 const getTextarea = document.querySelector('.textarea');
-
 // function remove symbol with help button backspace
 const backspaceValue = () => {
   const indexSymbolBeforeCursor = getTextarea.selectionEnd - 1;
@@ -267,7 +258,6 @@ const inputValue = (symbol) => {
   textarea.value = arrTextareaValue.join('');
   getTextarea.selectionEnd = indexSymbolAfterCursor + 1;
 };
-
 
 const capsLock = () => {
   for (let i = 0; i < button.length; i += 1) {
