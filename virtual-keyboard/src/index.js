@@ -147,6 +147,10 @@ body.addEventListener('keydown', (event) => {
       backspaceValue();
       break;
 
+    case 'Delete':
+      deleteValue();
+      break;
+
     default:
   }
 });
@@ -217,6 +221,10 @@ keyboard.addEventListener('click', (event) => {
       backspaceValue();
       break;
 
+    case 'Delete':
+      deleteValue();
+      break;
+
     default:
   }
 });
@@ -246,4 +254,14 @@ const backspaceValue = () => {
   arrTextareaValue.splice(indexSymbolBeforeCursor, 1);
   textarea.value = arrTextareaValue.join('');
   getTextarea.selectionEnd = indexSymbolBeforeCursor;
+};
+
+// function remove symbol with button delete
+const deleteValue = () => {
+  const indexSymbolAfterCursor = getTextarea.selectionEnd;
+  const arrTextareaValue = textarea.value.split('');
+
+  arrTextareaValue.splice(indexSymbolAfterCursor, 1).join('');
+  textarea.value = arrTextareaValue.join('');
+  getTextarea.selectionEnd = indexSymbolAfterCursor;
 };
