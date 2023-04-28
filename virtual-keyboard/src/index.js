@@ -238,6 +238,7 @@ keyboard.addEventListener('click', (event) => {
     && (shiftLeft.classList.contains('active') || shiftRight.classList.contains('active'))) {
     setButtonsValue();
     shiftLeft.classList.remove('active');
+    shiftRight.classList.remove('active');
   }
 });
 
