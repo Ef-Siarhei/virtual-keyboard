@@ -81,14 +81,14 @@ const button = [...document.getElementsByClassName('keyboard__button')];
 
 function addActive(event) {
   for (let i = 0; i < button.length; i += 1) {
-    if (button[i].id == event.code) {
+    if (button[i].id === event.code) {
       button[i].classList.add('active');
     }
   }
 }
 function removeActive(event) {
   for (let i = 0; i < button.length; i += 1) {
-    if (button[i].id == event.code) {
+    if (button[i].id === event.code) {
       button[i].classList.remove('active');
     }
   }
@@ -111,8 +111,8 @@ body.addEventListener('keydown', (e) => {
 body.addEventListener('keydown', (event) => {
   textarea.focus();
   button.forEach((el) => {
-    if (el.innerText.length == 1) {
-      if (el.id == event.code) {
+    if (el.innerText.length === 1) {
+      if (el.id === event.code) {
         inputValue(el.innerText);
       }
     }
@@ -152,9 +152,9 @@ onkeydown = (e) => {
   if (e.code === 'ControlLeft') { pressedButton[e.code] = e.code; }
   if (e.code === 'AltLeft') { pressedButton[e.code] = e.code; }
 
-  if (pressedButton.ControlLeft == 'ControlLeft'
-    && pressedButton.AltLeft == 'AltLeft') {
-    if (language == 'en') {
+  if (pressedButton.ControlLeft === 'ControlLeft'
+    && pressedButton.AltLeft === 'AltLeft') {
+    if (language === 'en') {
       sessionStorage.setItem('language', 'ru');
     } else {
       sessionStorage.setItem('language', 'en');
@@ -178,8 +178,8 @@ onkeyup = (e) => {
 keyboard.addEventListener('click', (event) => {
   textarea.focus();
   button.forEach((el) => {
-    if (el.innerText.length == 1) {
-      if (el.id == event.target.id) {
+    if (el.innerText.length === 1) {
+      if (el.id === event.target.id) {
         inputValue(el.innerText);
       }
     }
@@ -187,7 +187,7 @@ keyboard.addEventListener('click', (event) => {
 
   switch (event.target.id) {
     case 'Tab':
-      inputValue('    ');
+      inputValue('1111');
       break;
 
     case 'CapsLock':
@@ -261,7 +261,7 @@ const inputValue = (symbol) => {
 
 const capsLock = () => {
   for (let i = 0; i < button.length; i += 1) {
-    if (button[i].innerText.length == 1) {
+    if (button[i].innerText.length === 1) {
       button[i].classList.toggle('upper-case');
     }
   }
