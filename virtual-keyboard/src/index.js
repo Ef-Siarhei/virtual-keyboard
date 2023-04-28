@@ -84,14 +84,14 @@ function setButtonsValue(...args) {
 const button = [...document.getElementsByClassName('keyboard__button')];
 
 function addActive(event) {
-  for (let i = 0; i < button.length; i++) {
+  for (let i = 0; i < button.length; i += 1) {
     if (button[i].id == event.code) {
       button[i].classList.add('active');
     }
   }
 }
 function removeActive(event) {
-  for (let i = 0; i < button.length; i++) {
+  for (let i = 0; i < button.length; i += 1) {
     if (button[i].id == event.code) {
       button[i].classList.remove('active');
     }
@@ -106,7 +106,7 @@ body.addEventListener('keyup', (event) => {
   removeActive(event);
 });
 
-// поймать событие нажатия кнопки и отменить действие
+// поймать событие нажатия кнопки настоящей клавиатуры и отменить действие
 body.addEventListener('keydown', (e) => {
   e.preventDefault();
 });
@@ -270,7 +270,7 @@ const inputValue = (symbol) => {
 
 
 const capsLock = () => {
-  for (let i = 0; i < button.length; i++) {
+  for (let i = 0; i < button.length; i += 1) {
     if (button[i].innerText.length == 1) {
       button[i].classList.toggle('upper-case');
     }
