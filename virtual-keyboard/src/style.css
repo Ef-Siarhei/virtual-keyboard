@@ -425,4 +425,8 @@ template {
 
 .row5 button:nth-child(4) {
   width: 318px;
+}
+
+.capsLock_active {
+  color: aqua;
 }/*# sourceMappingURL=style.css.map */

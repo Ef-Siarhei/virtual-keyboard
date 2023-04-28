@@ -127,11 +127,7 @@ body.addEventListener('keydown', (event) => {
       break;
 
     case 'CapsLock':
-      for (let i = 0; i < button.length; i++) {
-        if (button[i].innerText.length == 1) {
-          button[i].classList.toggle('upper-case');
-        }
-      }
+      capsLock();
       break;
 
     case 'Space':
@@ -201,11 +197,7 @@ keyboard.addEventListener('click', (event) => {
       break;
 
     case 'CapsLock':
-      for (let i = 0; i < button.length; i++) {
-        if (button[i].innerText.length == 1) {
-          button[i].classList.toggle('upper-case');
-        }
-      }
+      capsLock();
       break;
 
     case 'Space':
@@ -274,4 +266,15 @@ const inputValue = (symbol) => {
   arrTextareaValue.splice(indexSymbolAfterCursor, 0, symbol).join('');
   textarea.value = arrTextareaValue.join('');
   getTextarea.selectionEnd = indexSymbolAfterCursor + 1;
+};
+
+
+const capsLock = () => {
+  for (let i = 0; i < button.length; i++) {
+    if (button[i].innerText.length == 1) {
+      button[i].classList.toggle('upper-case');
+    }
+  }
+  const CAPSLOCK = document.querySelector('#CapsLock');
+  CAPSLOCK.classList.toggle('capsLock_active');
 };
