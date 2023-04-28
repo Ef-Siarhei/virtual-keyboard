@@ -40,6 +40,18 @@ const html = `
 `;
 wrapContent.insertAdjacentHTML('beforeend', html);
 
+// set  Buttons Value
+const setButtonsValue = (...args) => {
+  const arrId = buttons.id;
+  const keyboardDom = document.getElementsByClassName('keyboard__row');
+  const a = args[0] ? args[0] : '';
+  arrId.forEach((el, indexId) => {
+    el.forEach((key, keyIndex) => {
+      keyboardDom[indexId].childNodes[keyIndex].innerText = `${buttons[`${language + a}`][indexId][keyIndex]}`;
+    });
+  });
+};
+
 // create buttons
 function createButtons() {
   const arr = buttons[language];
@@ -63,18 +75,6 @@ function createButtons() {
   setButtonsValue();
 }
 createButtons();
-
-// set  Buttons Value
-function setButtonsValue(...args) {
-  const arrId = buttons.id;
-  const keyboardDom = document.getElementsByClassName('keyboard__row');
-  const a = args[0] ? args[0] : '';
-  arrId.forEach((el, indexId) => {
-    el.forEach((key, keyIndex) => {
-      keyboardDom[indexId].childNodes[keyIndex].innerText = `${buttons[`${language + a}`][indexId][keyIndex]}`;
-    });
-  });
-}
 
 // добавить класс Active при нажатии на кнопку настоящей клавиатуры
 const button = [...document.getElementsByClassName('keyboard__button')];
@@ -107,45 +107,6 @@ body.addEventListener('keydown', (e) => {
   e.preventDefault();
 });
 
-// ввод текста с клавиатуры
-body.addEventListener('keydown', (event) => {
-  textarea.focus();
-  button.forEach((el) => {
-    if (el.innerText.length === 1) {
-      if (el.id === event.code) {
-        inputValue(el.innerText);
-      }
-    }
-  });
-  switch (event.code) {
-    case 'Tab':
-      inputValue('    ');
-      break;
-
-    case 'CapsLock':
-      capsLock();
-      break;
-
-    case 'Space':
-      inputValue(' ');
-      break;
-
-    case 'Enter':
-      inputValue('\n');
-      break;
-
-    case 'Backspace':
-      backspaceValue();
-      break;
-
-    case 'Delete':
-      deleteValue();
-      break;
-
-    default:
-  }
-});
-
 // Переключить язык ввода
 const pressedButton = {};
 onkeydown = (e) => {
@@ -173,46 +134,6 @@ onkeyup = (e) => {
 
   if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') { setButtonsValue(); }
 };
-
-// ввод текста мышкой
-keyboard.addEventListener('click', (event) => {
-  textarea.focus();
-  button.forEach((el) => {
-    if (el.innerText.length === 1) {
-      if (el.id === event.target.id) {
-        inputValue(el.innerText);
-      }
-    }
-  });
-
-  switch (event.target.id) {
-    case 'Tab':
-      inputValue('1111');
-      break;
-
-    case 'CapsLock':
-      capsLock();
-      break;
-
-    case 'Space':
-      inputValue(' ');
-      break;
-
-    case 'Enter':
-      inputValue('\n');
-      break;
-
-    case 'Backspace':
-      backspaceValue();
-      break;
-
-    case 'Delete':
-      deleteValue();
-      break;
-
-    default:
-  }
-});
 
 const shiftLeft = document.querySelector('#ShiftLeft');
 const shiftRight = document.querySelector('#ShiftRight');
@@ -268,3 +189,82 @@ const capsLock = () => {
   const CAPSLOCK = document.querySelector('#CapsLock');
   CAPSLOCK.classList.toggle('capsLock_active');
 };
+
+// ввод текста с клавиатуры
+body.addEventListener('keydown', (event) => {
+  textarea.focus();
+  button.forEach((el) => {
+    if (el.innerText.length === 1) {
+      if (el.id === event.code) {
+        inputValue(el.innerText);
+      }
+    }
+  });
+  switch (event.code) {
+    case 'Tab':
+      inputValue('    ');
+      break;
+
+    case 'CapsLock':
+      capsLock();
+      break;
+
+    case 'Space':
+      inputValue(' ');
+      break;
+
+    case 'Enter':
+      inputValue('\n');
+      break;
+
+    case 'Backspace':
+      backspaceValue();
+      break;
+
+    case 'Delete':
+      deleteValue();
+      break;
+
+    default:
+  }
+});
+
+// ввод текста мышкой
+keyboard.addEventListener('click', (event) => {
+  textarea.focus();
+  button.forEach((el) => {
+    if (el.innerText.length === 1) {
+      if (el.id === event.target.id) {
+        inputValue(el.innerText);
+      }
+    }
+  });
+
+  switch (event.target.id) {
+    case 'Tab':
+      inputValue('1111');
+      break;
+
+    case 'CapsLock':
+      capsLock();
+      break;
+
+    case 'Space':
+      inputValue(' ');
+      break;
+
+    case 'Enter':
+      inputValue('\n');
+      break;
+
+    case 'Backspace':
+      backspaceValue();
+      break;
+
+    case 'Delete':
+      deleteValue();
+      break;
+
+    default:
+  }
+});
