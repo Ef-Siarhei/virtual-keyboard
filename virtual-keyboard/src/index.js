@@ -134,20 +134,6 @@ onkeyup = (e) => {
   if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') { setButtonsValue(); }
 };
 
-const shiftLeft = document.querySelector('#ShiftLeft');
-const shiftRight = document.querySelector('#ShiftRight');
-keyboard.addEventListener('click', (event) => {
-  if (event.target.id === 'ShiftLeft' || event.target.id === 'ShiftRight') {
-    setButtonsValue('-Shift');
-    event.target.classList.add('active');
-  } else if ((event.target.id !== 'ShiftLeft' || event.target.id !== 'ShiftRight')
-    && (shiftLeft.classList.contains('active') || shiftRight.classList.contains('active'))) {
-    setButtonsValue();
-    shiftLeft.classList.remove('active');
-    shiftRight.classList.remove('active');
-  }
-});
-
 const getTextarea = document.querySelector('.textarea');
 // function remove symbol with help button backspace
 const backspaceValue = () => {
@@ -232,6 +218,7 @@ body.addEventListener('keydown', (event) => {
 // ввод текста мышкой
 keyboard.addEventListener('click', (event) => {
   textarea.focus();
+
   button.forEach((el) => {
     if (el.innerText.length === 1) {
       if (el.id === event.target.id) {
@@ -266,5 +253,19 @@ keyboard.addEventListener('click', (event) => {
       break;
 
     default:
+  }
+});
+
+const shiftLeft = document.querySelector('#ShiftLeft');
+const shiftRight = document.querySelector('#ShiftRight');
+keyboard.addEventListener('click', (event) => {
+  if (event.target.id === 'ShiftLeft' || event.target.id === 'ShiftRight') {
+    setButtonsValue('-Shift');
+    event.target.classList.add('active');
+  } else if ((event.target.id !== 'ShiftLeft' || event.target.id !== 'ShiftRight')
+    && (shiftLeft.classList.contains('active') || shiftRight.classList.contains('active'))) {
+    setButtonsValue();
+    shiftLeft.classList.remove('active');
+    shiftRight.classList.remove('active');
   }
 });
