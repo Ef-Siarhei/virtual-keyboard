@@ -117,14 +117,13 @@ body.addEventListener('keydown', (event) => {
   button.forEach((el) => {
     if (el.innerText.length == 1) {
       if (el.id == event.code) {
-        textarea.value += el.innerText;
+        inputValue(el.innerText);
       }
     }
   });
   switch (event.code) {
     case 'Tab':
-      textarea.value += '    ';
-      event.preventDefault();
+      inputValue('    ');
       break;
 
     case 'CapsLock':
@@ -136,11 +135,11 @@ body.addEventListener('keydown', (event) => {
       break;
 
     case 'Space':
-      textarea.value += ' ';
+      inputValue(' ');
       break;
 
     case 'Enter':
-      textarea.value += '\n';
+      inputValue('\n');
       break;
 
     case 'Backspace':
@@ -191,14 +190,14 @@ keyboard.addEventListener('click', (event) => {
   button.forEach((el) => {
     if (el.innerText.length == 1) {
       if (el.id == event.target.id) {
-        textarea.value += el.innerText;
+        inputValue(el.innerText);
       }
     }
   });
 
   switch (event.target.id) {
     case 'Tab':
-      textarea.value += '    ';
+      inputValue('    ');
       break;
 
     case 'CapsLock':
@@ -210,11 +209,11 @@ keyboard.addEventListener('click', (event) => {
       break;
 
     case 'Space':
-      textarea.value += ' ';
+      inputValue(' ');
       break;
 
     case 'Enter':
-      textarea.value += '\n';
+      inputValue('\n');
       break;
 
     case 'Backspace':
@@ -264,4 +263,14 @@ const deleteValue = () => {
   arrTextareaValue.splice(indexSymbolAfterCursor, 1).join('');
   textarea.value = arrTextareaValue.join('');
   getTextarea.selectionEnd = indexSymbolAfterCursor;
+};
+
+// function add symbol when pressing buttons
+const inputValue = (symbol) => {
+  const indexSymbolAfterCursor = getTextarea.selectionEnd;
+  const arrTextareaValue = textarea.value.split('');
+
+  arrTextareaValue.splice(indexSymbolAfterCursor, 0, symbol).join('');
+  textarea.value = arrTextareaValue.join('');
+  getTextarea.selectionEnd = indexSymbolAfterCursor + 1;
 };
