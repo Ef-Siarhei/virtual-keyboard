@@ -7,6 +7,13 @@ const localHash = () => {
 };
 localHash();
 
+// add site icon
+const head = document.querySelector('head');
+const link = document.createElement('link');
+link.rel = 'shortcut icon';
+link.href = '../images/icon-keyboard.png';
+head.append(link);
+
 const body = document.querySelector('body');
 body.className = 'body';
 // создать оболочку для всего контента
