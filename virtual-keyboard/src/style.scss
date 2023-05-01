@@ -1,0 +1,118 @@
+@import '../styles/normalize';
+
+.body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../images/matrix.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: rgba(136, 186, 145, 0.942);
+}
+
+.wrapContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 750px;
+  background-color: rgba(0, 0, 0, 0.616);
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-align: center;
+  transform: translate(-50%, -50%)
+}
+
+.title {
+  margin: 0.5rem;
+}
+
+.textarea {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 0.5rem;
+  border-radius: 10px;
+  border: 4px solid #000;
+  outline: 8px solid rgba(136, 186, 145, 0.445);
+  outline-offset: -11px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.466);
+  color: rgb(176, 213, 176);
+}
+
+.keyboard {
+  background-color: rgba(136, 186, 145, 0.445);
+  border-radius: 10px;
+  border: 4px solid #000;
+  padding: 5px;
+}
+
+.instruction {
+  margin: 0.5rem;
+  word-spacing: 0.5rem;
+  font-size: large;
+  line-height: 1.5rem;
+}
+
+.keyboard__button {
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.716);
+  color: rgba(136, 186, 145, 0.896);
+  cursor: pointer;
+  vertical-align: top;
+  margin: 3px;
+  transition: .5s;
+
+  &:hover {
+    background-color: rgba(97, 124, 102, 0.781);
+    color: #fff;
+  }
+
+  &:active {
+    background-color: rgba(198, 192, 95, 0.626);
+    outline: 4px solid rgba(0, 0, 0, 0.716);
+    outline-offset: -7px;
+    color: rgb(0, 0, 0);
+  }
+}
+
+.active {
+  background-color: rgba(198, 192, 95, 0.626);
+  outline: 4px solid rgba(0, 0, 0, 0.716);
+  outline-offset: -7px;
+  color: rgb(0, 0, 0);
+}
+
+.upper-case {
+  text-transform: uppercase;
+}
+
+.row1 button:last-child {
+  width: 87px;
+}
+
+.row2 button:first-child,
+.row2 button:last-child {
+  width: 40px;
+}
+
+.row3 button:last-child,
+.row4 button:last-child {
+  width: 85px;
+}
+
+.row3 button:first-child,
+.row4 button:first-child {
+  width: 89px;
+}
+
+.row5 button:nth-child(4) {
+  width: 318px;
+}
+
+.capsLock_active {
+  color: rgba(0, 255, 255, 0.577);
+}
